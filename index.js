@@ -22,15 +22,15 @@ function operation() {
     }])
     .then((answer) => {
         const action = answer['action'];
-        if(action === 'Criar Conta') {
+        if (action === 'Criar Conta') {
             createAccount();
-        } else if(action === 'Depositar') {
+        } else if (action === 'Depositar') {
             deposit();
-        } else if(action === 'Consultar Saldo') {
+        } else if (action === 'Consultar Saldo') {
             getAccountBalance();
-        } else if(action === 'Sacar') {
+        } else if (action === 'Sacar') {
 
-        } else if(action === 'Sair') {
+        } else if (action === 'Sair') {
             console.log(chalk.bgBlue.black('Obrigado por usar o Accounts!'));
             process.exit();
         }
@@ -53,11 +53,11 @@ function buildAccount() {
         const accountName = answer['accountName'];
         console.log(accountName);
 
-        if(!fs.existsSync('accounts')) {
+        if (!fs.existsSync('accounts')) {
             fs.mkdirSync('accounts');
         }
 
-        if(fs.existsSync(`accounts/${accountName}.json`)) {
+        if (fs.existsSync(`accounts/${accountName}.json`)) {
             console.log(chalk.bgRed.black('Esta conta ja existe, escolha outro nome!'));
             buildAccount();
             return
@@ -84,7 +84,7 @@ function deposit() {
     }])
     .then((answer) => {
         const accountName = answer['accountName'];
-        if(!checkAccount(accountName)) {
+        if (!checkAccount(accountName)) {
             return deposit()
         }
         inquirer.prompt([{
@@ -102,7 +102,7 @@ function deposit() {
 }
 
 function checkAccount(accountName) {
-    if(!fs.existsSync(`accounts/${accountName}.json`)) {
+    if (!fs.existsSync(`accounts/${accountName}.json`)) {
         console.log(chalk.bgRed.black('Esta conta nao existe, escolha outro nome!'));
         return false;
     }
